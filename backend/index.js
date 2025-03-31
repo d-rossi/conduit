@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const config = require('./config')
+const Article = require('./models/article')
 
 config.connectToDB()
 
@@ -9,11 +10,9 @@ app.get('/', (request, response) => {
 })
 
 app.get('/articles', (request, response) => {
-    const article = {id: "1", title: "title", userId: "u1"}
-    //get from db
-
-    //return
-    response.json(article)
+    Article.find()
+           .then(data => response.json(data))
+           .catch(err => console.log(err))
 })
 
 const PORT = 3001
