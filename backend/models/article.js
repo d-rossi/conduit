@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 
 articleSchema = new mongoose.Schema({
     title: String,
-    userId: String
+    userId: String,
+    createdAt: Date
 })
 
 articleSchema.set('toJSON', {

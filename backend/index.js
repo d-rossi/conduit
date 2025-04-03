@@ -10,7 +10,11 @@ app.get('/', (request, response) => {
 })
 
 app.get('/articles', (request, response) => {
-    Article.find()
+    const { page = 1, limit = 10, userId } = request.query;
+
+    const filter = {};
+    if (userId) filter.userId = userId;
+    Article.find(filter).sort({ createdAt: -1 }).skip((page - 1) * limit).limit(parseInt(limit))
            .then(data => response.json(data))
            .catch(err => console.log(err))
 })
