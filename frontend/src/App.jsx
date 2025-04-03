@@ -1,7 +1,9 @@
+import ArticleList from './components/ArticleList';
+
 function App() {
   return (
     <>
-      <p>Hello World from Conduit App</p>
+      <ArticleList/>
     </>
   )
 }
