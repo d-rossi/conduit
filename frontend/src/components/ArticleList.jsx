@@ -1,16 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ArticleCard from "./ArticleCard/ArticleCard"
+import { getArticles } from "../services/articleService"
 
 const ArticleList = () => {
-    const [articles, setArticles] = useState([1, 2, 3])
-    //get articles in useEffect
-    //set articles state
-    //iterate over articles and display them
+    const [articles, setArticles] = useState([])
+    useEffect(() => {
+        getArticles().then((articles) => setArticles(articles))
+    }, [])
     return (
         <div>
             <ul>
                 {articles.map(article => 
-                    <ArticleCard />
+                    <ArticleCard key={article.id} title={article.title} author={article.userId} />
                 )}
             </ul>
         </div>

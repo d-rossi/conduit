@@ -2,8 +2,11 @@ const express = require('express')
 const app = express()
 const config = require('./config')
 const Article = require('./models/article')
+const cors = require('cors')
 
 config.connectToDB()
+
+app.use(cors())
 
 app.get('/', (request, response) => {
     response.send("<h1>HELLO WORLD from the conduit app!</h1>")

@@ -1,16 +1,16 @@
 import './ArticleCard.css'
 
-const ArticleCard = () => {
+const ArticleCard = ({ title, author }) => {
   return (
-    <li class="card">
-      <div class="card__left">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/2019_Toyota_Corolla_Icon_Tech_VVT-i_Hybrid_1.8.jpg/1920px-2019_Toyota_Corolla_Icon_Tech_VVT-i_Hybrid_1.8.jpg" alt="article image" class="card__left--image" />
+    <li className="card">
+      <div className="card__left">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/2019_Toyota_Corolla_Icon_Tech_VVT-i_Hybrid_1.8.jpg/1920px-2019_Toyota_Corolla_Icon_Tech_VVT-i_Hybrid_1.8.jpg" alt="article image" className="card__left--image" />
       </div>
-      <div class="card__right">
-        <h3>TITLE</h3>
-        <div class="card__right__footer">
-          <h6 class="card__right__footer--author">Author</h6>
-          <h6 class="card__right__footer--comment">5 Comments</h6>
+      <div className="card__right">
+        <h3>{title}</h3>
+        <div className="card__right__footer">
+          <h6 className="card__right__footer--author">{author}</h6>
+          <h6 className="card__right__footer--comment">5 Comments</h6>
         </div>
       </div>
     </li>

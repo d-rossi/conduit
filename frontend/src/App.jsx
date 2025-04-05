@@ -1,9 +1,9 @@
-import ArticleList from './components/ArticleList';
+import Home from './pages/Home';
 
 function App() {
   return (
     <>
-      <ArticleList/>
+      <Home />
     </>
   )
 }
