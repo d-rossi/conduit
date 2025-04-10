@@ -1,0 +1,35 @@
+:root {
+    --primary-color: #978897;
+    --secondary-dark-color: #494850;
+    --secondary-light-color: #B18FCF;
+    --tertiary-dark-color: #2C2C34;
+    --tertiary-light-color: #D8D8F6;
+}
+
+@font-face {
+    font-family: "Inter_Thin";
+    src: url(./src/assets/fonts/Inter_18pt-Thin.ttf);
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url(./src/assets/fonts/Inter_18pt-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Inter_Semi_Bold";
+    src: url(./src/assets/fonts/Inter_18pt-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: "Inter_Bold";
+    src: url(./src/assets/fonts/Inter_18pt-Bold.ttf);
+}
+
+body {
+    background-color: var(--primary-color);
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", Arial, sans-serif;
+    color: var(--tertiary-dark-color);
+}

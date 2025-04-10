@@ -1,7 +1,10 @@
+import Home from './pages/Home';
+import '../index.css'
+
 function App() {
   return (
     <>
-      <p>Hello World from Conduit App</p>
+      <Home />
     </>
   )
 }
