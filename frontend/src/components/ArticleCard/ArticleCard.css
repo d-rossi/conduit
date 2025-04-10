@@ -2,12 +2,19 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    background-color: #D8D8F6;
+    background-color: var(--tertiary-light-color);
     width: 50%;
     list-style: none;
-    border: 3px solid #B18FCF;
+    border: 3px solid var(--secondary-light-color);
     margin-bottom: -3px; /*cancels out border overlap */
     box-sizing: border-box;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
 }
 
 .card__left {
@@ -27,7 +34,8 @@
 }
 
 .card__right h3 {
-    font-size: 1.2rem;
+    font-family: "Inter_Semi_Bold";
+    font-size: 20px;
     margin: 2% 0 10% 2%;
 }
 
@@ -39,8 +47,19 @@
 
 .card__right__footer--author {
     margin: 0 0 1% 2%;
+    font-family: "Inter_Thin";
+    font-size: 14px;
+    color: var(--secondary-dark-color);
 }
 
 .card__right__footer--comment {
+    font-family: "Inter_Semi_Bold";
+    font-size: 14px;
+    color: var(--tertiary-light-color);
     margin: 0 1% 1% 0;
+    background-size: contain; /* Scales the icon properly */
+    background-repeat: no-repeat; /* Prevents tiling */
+    background-position: center; /* Positions the icon */
+    background-image: url(../../assets/icons/comments.svg);
+    padding: 0.7rem;
 }

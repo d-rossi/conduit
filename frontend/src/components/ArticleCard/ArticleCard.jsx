@@ -10,7 +10,7 @@ const ArticleCard = ({ title, author }) => {
         <h3>{title}</h3>
         <div className="card__right__footer">
           <h6 className="card__right__footer--author">{author}</h6>
-          <h6 className="card__right__footer--comment">5 Comments</h6>
+          <h6 className="card__right__footer--comment">5</h6>
         </div>
       </div>
     </li>
