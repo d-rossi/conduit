@@ -7,9 +7,10 @@ const cors = require('cors')
 config.connectToDB()
 
 app.use(cors())
+app.use(express.static('dist'))
 
 app.get('/', (request, response) => {
-    response.send("<h1>HELLO WORLD from the conduit app!</h1>")
+    response.send('<h1>HELLO WORLD from the conduit app!</h1>')
 })
 
 app.get('/articles', (request, response) => {
@@ -22,7 +23,7 @@ app.get('/articles', (request, response) => {
            .catch(err => console.log(err))
 })
 
-const PORT = 3001
+const PORT = process.env.MONGODB_PORT || 3001
 app.listen(PORT, () => {
     console.log(`App is running on port ${PORT}`)
 })
