@@ -1,16 +1,16 @@
 const mongoose = require('mongoose')
 
-articleSchema = new mongoose.Schema({
-    title: String,
-    userId: String,
-    createdAt: Date
+userSchema = new mongoose.Schema({
+    username: String,
+    passwordHash: String,
 }, {timestamps:true})
 
-articleSchema.set('toJSON', {
+userSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString()
         delete returnedObject._id
+        delete returnedDocument.passwordHash
     }
 })
 
-module.exports = mongoose.model('Article', articleSchema)
+module.exports = mongoose.model('User', userSchema)
