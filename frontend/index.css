@@ -17,6 +17,11 @@
 }
 
 @font-face {
+    font-family: "Inter_Medium";
+    src: url(./src/assets/fonts/Inter_18pt-Medium.ttf);
+}
+
+@font-face {
     font-family: "Inter_Semi_Bold";
     src: url(./src/assets/fonts/Inter_18pt-SemiBold.ttf);
 }
@@ -24,6 +29,11 @@
 @font-face {
     font-family: "Inter_Bold";
     src: url(./src/assets/fonts/Inter_18pt-Bold.ttf);
+}
+
+@font-face {
+    font-family: "Inter_Extra_Bold";
+    src: url(./src/assets/fonts/Inter_18pt-ExtraBold.ttf);
 }
 
 body {
