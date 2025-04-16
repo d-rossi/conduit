@@ -1,5 +1,5 @@
 import './Button.css'
 
-const Button = ({text}) => <button>{text}</button>
+const Button = ({text, onClickHandler}) => <button onClick={(onClickHandler)}>{text}</button>
 
 export default Button
