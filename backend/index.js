@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const config = require('./config')
-const Article = require('./models/article')
 const cors = require('cors')
 const articlesRouter = require('./controllers/articles')
 const usersRouter = require('./controllers/users')
@@ -9,8 +8,9 @@ const errorHandler = require('./utils/errorHandler')
 
 config.connectToDB()
 
+app.use(express.json())
 app.use(cors())
-// app.use(express.static('dist'))
+app.use(express.static('dist'))
 
 app.use('/articles', articlesRouter)
 app.use('/users', usersRouter)
