@@ -3,9 +3,13 @@ import Input from '../components/Input/Input'
 import './Register.css'
 import typewriter from '../assets/pictures/typewriter.svg'
 import { useState } from 'react'
+import AuthService from '../services/authService'
 
 const Register = () => {
     const [isRegistered, setIsRegistered] = useState(false)
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     const authenticate = (event) => {
         event.preventDefault()
@@ -14,16 +18,20 @@ const Register = () => {
     }
 
     const login = () => {
-      //call to backend
-        
-      //if succesful set token in localStorage
+      AuthService.login(username, password)
+                 .then(data => localStorage.setItem("token", data.token))
+                 .catch((err) => console.log(err))
     }
 
     const signUp = () => {
-        //call to backend
-        
-        //if succesful
-        setIsRegistered(true)
+        AuthService.signUp(username, email, password)
+                   .then(() => { 
+                            setUsername("")
+                            setEmail("")
+                            setPassword("")
+                            setIsRegistered(true) 
+                        })
+                   .catch((err) => console.log(err))
     }
     
     return (
@@ -37,10 +45,10 @@ const Register = () => {
                 <h2 className='header__read'>Read</h2>
                 <h2 className='header__inspire'>Inspire</h2>
                 <form className='register__right__form'>
-                    <Input placeholder="Username"/>
-                    {!isRegistered && <Input placeholder="Email"/>}
-                    <Input placeholder="Password"/>
-                    <Button text={isRegistered ? "Login" : "Sign Up"} onClickHandler={(e) => authenticate(e)}/>
+                    <Input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                    {!isRegistered && <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>}
+                    <Input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <Button text={isRegistered ? "Login" : "Sign Up"} onClick={(e) => authenticate(e)}/>
                 </form>
                 {!isRegistered ? <p>Already have an account? <a href=''>Login</a></p> 
                                : <p>Don't have an account? <a href=''>Register</a></p> 
