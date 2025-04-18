@@ -7,7 +7,7 @@ routeHandler.post('/signup', async (request, response) => {
     const {username, email, password} = request.body
     if (await getExistingUserByUsernameOrEmail(username, email))  return response.status(400).json({error: 'Username or email already exists'})
     const passwordHash = await bcrypt.hash(password, 10)
-    new User({username, passwordHash}).save()
+    new User({username, email, passwordHash}).save()
                                .then(data => response.json(data))
                                .catch(err => console.log(err))
 })

@@ -45,8 +45,8 @@ const Register = () => {
                 <h2 className='header__read'>Read</h2>
                 <h2 className='header__inspire'>Inspire</h2>
                 <form className='register__right__form'>
-                    <Input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
-                    {!isRegistered && <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>}
+                    <Input placeholder="Username" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                    {!isRegistered && <Input placeholder="Email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>}
                     <Input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                     <Button text={isRegistered ? "Login" : "Sign Up"} onClick={(e) => authenticate(e)}/>
                 </form>
