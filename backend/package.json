@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "node --env-file=.env index.js",
+    "dev": "nodemon --env-file=.env index.js",
     "deploy": "cd ../frontend && npm run build && cp -r dist ../backend/dist && cd ../backend && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,8 +12,13 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
   }
 }

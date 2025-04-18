@@ -4,7 +4,7 @@ articleSchema = new mongoose.Schema({
     title: String,
     userId: String,
     createdAt: Date
-})
+}, {timestamps:true})
 
 articleSchema.set('toJSON', {
     transform: (document, returnedObject) => {

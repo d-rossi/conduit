@@ -1,0 +1,15 @@
+button {
+    width: 113px;
+    height: 49px;
+    border-radius: 10px;
+    border: 2px solid var(--secondary-dark-color);
+    background-color: var(--secondary-light-color);
+    color: var(--tertiary-dark-color);
+    font-family: "Inter_Extra_Bold";
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+button:hover {
+    cursor: pointer;
+}
