@@ -4,8 +4,8 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 routeHandler.post('/signup', async (request, response) => {
-    const {username, password} = request.body
-    if (await getExistingUser(username))  return response.status(400).json({error: 'Username already exists'})
+    const {username, email, password} = request.body
+    if (await getExistingUserByUsernameOrEmail(username, email))  return response.status(400).json({error: 'Username or email already exists'})
     const passwordHash = await bcrypt.hash(password, 10)
     new User({username, passwordHash}).save()
                                .then(data => response.json(data))
@@ -14,7 +14,7 @@ routeHandler.post('/signup', async (request, response) => {
 
 routeHandler.post('/login', async (request, response) => {
     const {username, password} = request.body
-    const existingUser = await getExistingUser(username)
+    const existingUser = await getExistingUserByUsername(username)
     const isPasswordCorrect = existingUser === null ? false : await bcrypt.compare(password, existingUser.passwordHash)
     if (!(existingUser && isPasswordCorrect)) {
        return response.status(404).json({error: 'Username or password is invalid!'})
@@ -24,8 +24,12 @@ routeHandler.post('/login', async (request, response) => {
     response.status(200).json({token, username: username})
 })
 
-const getExistingUser = async (username) => {
-    return await User.findOne({username: username})
+const getExistingUserByUsernameOrEmail = async (username, email) => {
+    return await User.findOne({ $or: [{ username }, { email }] })
+}
+
+const getExistingUserByUsername = async (username) => {
+    return await User.findOne({ username })
 }
 
 module.exports = routeHandler
