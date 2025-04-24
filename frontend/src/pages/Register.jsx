@@ -5,6 +5,7 @@ import typewriter from '../assets/pictures/typewriter.svg'
 import { useState } from 'react'
 import AuthService from '../services/authService'
 import { Link, useNavigate } from 'react-router-dom'
+import Logo from '../components/Logo/Logo'
 
 const Register = ({ isSignUp }) => {
     const [isRegistered, setIsRegistered] = useState(!isSignUp)
@@ -46,7 +47,7 @@ const Register = ({ isSignUp }) => {
                 <img src={typewriter} className='register__left--img'></img>
             </div>
             <div className='register__right'>
-                <h1>CONDUIT</h1>
+                <Logo />
                 <h2>Publish</h2>
                 <h2 className='header__read'>Read</h2>
                 <h2 className='header__inspire'>Inspire</h2>
