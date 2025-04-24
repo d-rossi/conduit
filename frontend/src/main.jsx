@@ -6,6 +6,7 @@ import Register from './pages/Register.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import '../index.css'
 import ProtectedRoutes from './utils/ProtectedRoutes.jsx'
+import Anonymous from './utils/Anonymous.jsx'
 
 const router = createBrowserRouter([
   {
@@ -19,13 +20,18 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path: '/signup',
-    element: <Register isSignUp={true} />
-  },
-  {
-    path: '/login',
-    element: <Register isSignUp={false} />
-  },
+    element: <Anonymous />,
+    children: [
+      {
+        path: '/signup',
+        element: <Register isSignUp={true} />
+      },
+      {
+        path: '/login',
+        element: <Register isSignUp={false} />
+      },
+    ]
+  }
 ])
 
 createRoot(document.getElementById('root')).render(
