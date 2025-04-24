@@ -4,12 +4,14 @@ import './Register.css'
 import typewriter from '../assets/pictures/typewriter.svg'
 import { useState } from 'react'
 import AuthService from '../services/authService'
+import { Link, useNavigate } from 'react-router-dom'
 
-const Register = () => {
-    const [isRegistered, setIsRegistered] = useState(false)
+const Register = ({ isSignUp }) => {
+    const [isRegistered, setIsRegistered] = useState(!isSignUp)
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const navigate = useNavigate();
 
     const authenticate = (event) => {
         event.preventDefault()
@@ -19,7 +21,10 @@ const Register = () => {
 
     const login = () => {
       AuthService.login(username, password)
-                 .then(data => localStorage.setItem("token", data.token))
+                 .then(data => {
+                        localStorage.setItem("token", data.token)
+                        navigate("/")
+                    })
                  .catch((err) => console.log(err))
     }
 
@@ -29,7 +34,8 @@ const Register = () => {
                             setUsername("")
                             setEmail("")
                             setPassword("")
-                            setIsRegistered(true) 
+                            setIsRegistered(true)
+                            navigate("/")
                         })
                    .catch((err) => console.log(err))
     }
@@ -50,8 +56,8 @@ const Register = () => {
                     <Input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                     <Button text={isRegistered ? "Login" : "Sign Up"} onClick={(e) => authenticate(e)}/>
                 </form>
-                {!isRegistered ? <p>Already have an account? <a href=''>Login</a></p> 
-                               : <p>Don't have an account? <a href=''>Register</a></p> 
+                {!isRegistered ? <p>Already have an account? <Link to="/login" onClick={() => setIsRegistered(true)}>Login</Link></p> 
+                               : <p>Don't have an account? <Link to="/signup" onClick={() => setIsRegistered(false)}>Sign up</Link></p> 
                 }
             </div>
         </div>

@@ -1,0 +1,28 @@
+.not_found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    background-color: var(--tertiary-dark-color);
+    height: 100vh;
+    padding: 0 10px;
+    overflow: hidden;
+    font-family: "Inter_Bold";
+}
+
+.not_found p {
+    color: var(--tertiary-light-color);
+    font-size: 2.5rem;
+    font-family: "Inter";
+}
+
+.not_found--link {
+    font-size: 1.8rem;
+    font-family: "Inter";
+    padding: 8px;
+    border: 2px solid;
+    border-radius: 10px;
+    background-color: var(--secondary-light-color);
+    color: var(--tertiary-dark-color);
+}
