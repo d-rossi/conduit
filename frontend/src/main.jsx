@@ -9,15 +9,20 @@ import ProtectedRoutes from './utils/ProtectedRoutes.jsx'
 import Anonymous from './utils/Anonymous.jsx'
 
 const router = createBrowserRouter([
+  // {
+  //   element: <ProtectedRoutes />,
+  //   errorElement: <NotFoundPage />,
+  //   children: [
+  //     {
+  //       path: '/',
+  //       element: <Home />
+  //     },
+  //   ]
+  // },
   {
-    element: <ProtectedRoutes />,
+    element: <Home />,
+    path: '/',
     errorElement: <NotFoundPage />,
-    children: [
-      {
-        path: '/',
-        element: <Home />
-      },
-    ]
   },
   {
     element: <Anonymous />,
