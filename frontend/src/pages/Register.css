@@ -42,14 +42,6 @@
     text-indent: 120px;
 }
 
-.register__right__form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 100px;
-}
-
 input {
     width: 60%;
 }
