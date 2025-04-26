@@ -1,0 +1,7 @@
+.logo {
+    margin-left: 10px;
+    font-family: "Inter_Bold";
+    font-size: 32px;
+    color: var(--primary-color);
+    -webkit-text-stroke: 1px var(--secondary-dark-color);
+}
