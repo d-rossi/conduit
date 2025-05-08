@@ -1,0 +1,15 @@
+.form__container {
+    background-color: var(--tertiary-light-color);
+    border-radius: 5;
+    width: 90%;
+    margin: 0 auto;
+    height: 85vh;
+}
+
+.form__container h1 {
+    color: var(--secondary-dark-color);
+    font-family: "Inter_Bold";
+    font-size: 30px;
+    text-align: center;
+    padding-top: 30px;
+}

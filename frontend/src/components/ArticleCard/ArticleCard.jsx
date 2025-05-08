@@ -1,10 +1,10 @@
 import './ArticleCard.css'
 
-const ArticleCard = ({ title, author }) => {
+const ArticleCard = ({ title, author, img }) => {
   return (
     <li className="card">
       <div className="card__left">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/2019_Toyota_Corolla_Icon_Tech_VVT-i_Hybrid_1.8.jpg/1920px-2019_Toyota_Corolla_Icon_Tech_VVT-i_Hybrid_1.8.jpg" alt="article image" className="card__left--image" />
+        <img src={img} alt="article image" className="card__left--image" />
       </div>
       <div className="card__right">
         <h3>{title}</h3>

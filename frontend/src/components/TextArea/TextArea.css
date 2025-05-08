@@ -1,0 +1,20 @@
+textarea {
+    background-color: rgba(151, 136, 151, 0.2);
+    width: 60%;
+    border: 1.5px solid var(--tertiary-dark-color);
+    height: 35px;
+    margin-bottom: 37px;
+    text-indent: 5px;
+    height: 8rem;
+}
+
+textarea::placeholder {
+    font-family: "Inter_Medium";
+    font-size: 12px;
+    color: var(--tertiary-dark-color);
+    opacity: 60%;
+}
+
+textarea:focus {
+    outline: none;
+}
