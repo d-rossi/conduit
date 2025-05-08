@@ -10,5 +10,15 @@ routeHandler.get('/', (request, response) => {
            .then(data => response.json(data))
            .catch(err => console.log(err))
 })
+    
+routeHandler.post('/', (request, response) => {
+    const {title, userId, content, imgUrl} = request.body
+
+    const filter = {};
+    if (userId) filter.userId = userId;
+    new Article({title, userId, content, imgUrl}).save()
+                               .then(data => response.json(data))
+                               .catch(err => console.log(err))
+})
 
 module.exports = routeHandler
