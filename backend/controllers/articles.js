@@ -1,5 +1,8 @@
 const routeHandler = require('express').Router()
 const Article = require('../models/article')
+const tokenExtractor = require('../utils/tokenExtractor')
+
+routeHandler.use(tokenExtractor.verifyToken)
 
 routeHandler.get('/', (request, response) => {
     const { page = 1, limit = 10, userId } = request.query;
