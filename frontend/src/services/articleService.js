@@ -12,8 +12,9 @@ export const createArticle = async (title, imgUrl, content) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        body: JSON.stringify({title, userId: "u3", imgUrl, content}),
+        body: JSON.stringify({title, imgUrl, content}),
       });
   
       return await response.json();

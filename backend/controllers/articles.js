@@ -2,8 +2,6 @@ const routeHandler = require('express').Router()
 const Article = require('../models/article')
 const tokenExtractor = require('../utils/tokenExtractor')
 
-routeHandler.use(tokenExtractor.verifyToken)
-
 routeHandler.get('/', (request, response) => {
     const { page = 1, limit = 10, userId } = request.query;
 
@@ -13,6 +11,8 @@ routeHandler.get('/', (request, response) => {
            .then(data => response.json(data))
            .catch(err => console.log(err))
 })
+
+routeHandler.use(tokenExtractor.verifyToken)
     
 routeHandler.post('/', (request, response) => {
     const {title, content, imgUrl} = request.body;
