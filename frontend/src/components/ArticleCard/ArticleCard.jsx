@@ -1,8 +1,8 @@
 import './ArticleCard.css'
 
-const ArticleCard = ({ title, author, img }) => {
+const ArticleCard = ({ title, author, img, onClick }) => {
   return (
-    <li className="card">
+    <li className="card" onClick={onClick}>
       <div className="card__left">
         <img src={img} alt="article image" className="card__left--image" />
       </div>

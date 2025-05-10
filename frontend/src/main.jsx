@@ -9,6 +9,7 @@ import ProtectedRoutes from './utils/ProtectedRoutes.jsx'
 import Anonymous from './utils/Anonymous.jsx'
 import CreateArticle from './pages/CreateArticlePage/CreateArticle.jsx'
 import Layout from './components/Layout/Layout.jsx'
+import ArticlePage from './pages/ArticlePage/ArticlePage.jsx'
 
 
 const router = createBrowserRouter([
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/articles/:articleId",
+        element: <ArticlePage />,
       },
       {
         element: <ProtectedRoutes />,
