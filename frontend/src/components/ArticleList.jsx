@@ -11,7 +11,7 @@ const ArticleList = () => {
         <div>
             <ul>
                 {articles.map(article => 
-                    <ArticleCard key={article.id} title={article.title} author={article.userId} />
+                    <ArticleCard key={article.id} title={article.title} author={article.userId} img={article.imgUrl} />
                 )}
             </ul>
         </div>

@@ -17,7 +17,8 @@ const Navbar = () => {
       localStorage.removeItem("token")
       setUser(null) // Trigger re-render
       navigate("/")
-    };
+    }
+
     return (
         <header>
             <Logo />
