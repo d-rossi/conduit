@@ -15,10 +15,8 @@ routeHandler.get('/', (request, response) => {
 })
     
 routeHandler.post('/', (request, response) => {
-    const {title, userId, content, imgUrl} = request.body
-
-    const filter = {};
-    if (userId) filter.userId = userId;
+    const {title, content, imgUrl} = request.body;
+    const userId = request.user.id
     new Article({title, userId, content, imgUrl}).save()
                                .then(data => response.json(data))
                                .catch(err => console.log(err))
