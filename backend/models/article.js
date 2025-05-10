@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 articleSchema = new mongoose.Schema({
     title: String,
-    userId: String,
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     imgUrl: String,
     content: String
 }, {timestamps:true})

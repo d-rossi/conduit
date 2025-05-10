@@ -7,7 +7,7 @@ routeHandler.get('/', (request, response) => {
 
     const filter = {};
     if (userId) filter.userId = userId;
-    Article.find(filter).sort({ createdAt: -1 }).skip((page - 1) * limit).limit(parseInt(limit))
+    Article.find(filter).populate("userId", "username").sort({ createdAt: -1 }).skip((page - 1) * limit).limit(parseInt(limit))
            .then(data => response.json(data))
            .catch(err => console.log(err))
 })
@@ -20,6 +20,11 @@ routeHandler.post('/', (request, response) => {
     new Article({title, userId, content, imgUrl}).save()
                                .then(data => response.json(data))
                                .catch(err => console.log(err))
+})
+
+routeHandler.get('/:id', (request, response) => {
+    const articleId = request.params.id
+    Article.findById(articleId).populate("userId", "username").then(data => response.json(data)).catch(err => console.log(err))
 })
 
 module.exports = routeHandler
