@@ -1,0 +1,40 @@
+.profile-card {
+    display: grid;
+    grid-template-columns: auto 1fr; /* Two columns: Image + Info */
+    grid-template-rows: auto auto auto; /* Three rows: Profile, Description, Button */
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: var(--tertiary-light-color);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.profile-pic {
+    grid-row: 1 / 3; /* Span two rows */
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.profile-info h2, .profile-info p {
+    margin: 0; /* Removes unnecessary spacing */
+}
+
+.profile-description {
+    grid-column: span 2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-family: "Inter_Medium";
+    font-size: 12px;
+}
+
+.profile-card button {
+    grid-column: 2 /2;
+    justify-self: end;
+}

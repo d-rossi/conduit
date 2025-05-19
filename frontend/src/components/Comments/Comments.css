@@ -1,0 +1,40 @@
+.comments-card {
+    background-color: var(--tertiary-light-color);
+    border-radius: 10px;
+}
+
+.comments-card__comment {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   border-top: 2.5px solid rgba(0, 0, 0, 0.15);
+   padding: 10px;
+}
+
+.comments-card__comment--text {
+    text-align: left;
+    font-family: "Inter_Light";
+    font-size: 12px;
+    margin-right: 20px;
+}
+
+.comments-card__comment--name {
+    font-family: "Inter_Semi_Bold";
+    font-size: 14px;
+    align-self: flex-start;
+    margin: 0;
+}
+
+.comments-card__comment:first-of-type {
+   border-top: 0px;
+   padding: 0px;
+   margin: 0 7px;
+   color: var(--secondary-dark-color);
+   font-family: "Inter_Bold";
+   font-size: 15px;
+}
+
+.comments-card__comment:last-of-type {
+    border-bottom: 2.5px solid rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px;
+}

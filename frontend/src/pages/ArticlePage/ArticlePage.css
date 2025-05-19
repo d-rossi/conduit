@@ -1,0 +1,30 @@
+.article-page {
+    display: flex;
+    justify-content: space-evenly;
+    height: 80vh;
+    margin: 0 1rem;
+}
+
+.article {
+    flex: 2;
+    background-color: var(--tertiary-light-color);
+    border-radius: 5px;
+    margin-right: 2rem;
+    text-align: left;
+}
+
+.article__title {
+    text-align: center;
+}
+
+.article__content {
+    text-align: left;
+    text-indent: 10px;
+}
+
+.sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
