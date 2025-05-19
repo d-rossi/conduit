@@ -1,3 +1,4 @@
+import Comments from "../../components/Comments/Comments"
 import ProfileCard from "../../components/ProfileCard/ProfileCard"
 import "./ArticlePage.css"
 
@@ -10,9 +11,7 @@ const ArticlePage = () => {
             </div>
             <div className="sidebar">
                 <ProfileCard />
-                <div className="comments">
-                    <h2>Comments</h2>
-                </div>
+                <Comments />
             </div>
         </div>
     )

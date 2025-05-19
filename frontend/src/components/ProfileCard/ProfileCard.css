@@ -30,6 +30,8 @@
     grid-column: span 2;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    font-family: "Inter_Medium";
+    font-size: 12px;
 }
 
 .profile-card button {

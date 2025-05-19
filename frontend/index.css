@@ -12,6 +12,11 @@
 }
 
 @font-face {
+    font-family: "Inter_Light";
+    src: url(./src/assets/fonts/Inter_18pt-Light.ttf);
+}
+
+@font-face {
     font-family: "Inter";
     src: url(./src/assets/fonts/Inter_18pt-Regular.ttf);
 }
