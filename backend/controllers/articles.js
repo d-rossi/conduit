@@ -30,9 +30,8 @@ routeHandler.get('/:id', (request, response) => {
 routeHandler.delete('/:id', async (request, response) => {
    const userIdOfRequest = request.user.id
    const articleId = request.params.id
-   const articleToDelete = await Article.findById(articleId)
-   if (articleToDelete && userIdOfRequest === articleToDelete.userId.toString()) {
-    await Article.deleteOne(articleToDelete)
+  const { deletedCount } = await Article.deleteOne({ _id: articleId, userId: userIdOfRequest })
+   if (deletedCount) {
     response.sendStatus(204)
    } else {
      response.status(400).send({err: "The article was not found or you are unauthorized to delete it"})
