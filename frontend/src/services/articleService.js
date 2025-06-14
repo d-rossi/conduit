@@ -6,6 +6,12 @@ export const getArticles = () => {
     .catch((error) => console.error("Error fetching data:", error));
 }
 
+export const getArticle = (id) => {
+    return fetch(`${API_URL}/articles/${id}`)
+    .then((response) => response.json())
+    .catch((error) => console.error("Error fetching article data:", error));
+}
+
 export const createArticle = async (title, imgUrl, content) => {
     try {
       const response = await fetch(`${API_URL}/articles`, {
