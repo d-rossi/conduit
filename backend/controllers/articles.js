@@ -12,6 +12,11 @@ routeHandler.get('/', (request, response) => {
            .catch(err => console.log(err))
 })
 
+routeHandler.get('/:id', (request, response) => {
+    const articleId = request.params.id
+    Article.findById(articleId).populate("userId", "username").then(data => response.json(data)).catch(err => console.log(err))
+})
+
 routeHandler.use(tokenExtractor.verifyToken)
     
 routeHandler.post('/', (request, response) => {
@@ -20,11 +25,6 @@ routeHandler.post('/', (request, response) => {
     new Article({title, userId, content, imgUrl}).save()
                                .then(data => response.json(data))
                                .catch(err => console.log(err))
-})
-
-routeHandler.get('/:id', (request, response) => {
-    const articleId = request.params.id
-    Article.findById(articleId).populate("userId", "username").then(data => response.json(data)).catch(err => console.log(err))
 })
 
 routeHandler.delete('/:id', async (request, response) => {
