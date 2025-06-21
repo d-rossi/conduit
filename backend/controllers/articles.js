@@ -1,5 +1,6 @@
 const routeHandler = require('express').Router()
 const Article = require('../models/article')
+const Favorite = require('../models/favorite')
 const tokenExtractor = require('../utils/tokenExtractor')
 
 routeHandler.get('/', (request, response) => {
@@ -54,6 +55,29 @@ routeHandler.delete('/', async (request, response) => {
   const userIdOfRequest = request.user.id
   await Article.deleteMany({ userId: userIdOfRequest })
   response.sendStatus(204)
+})
+
+routeHandler.post('/:id/favorite', async (request, response) => {
+  const articleId = request.params.id
+  const userId = request.user.id
+
+  const existingArticle = await Article.findById(articleId)
+
+  if(!existingArticle){
+    return response.status(404).send({err: "Article not found."})
+  }
+
+  if (userId === existingArticle.userId.toString()) {
+    return response.status(403).send({err: "You cannot favorite an article that you have written!"})
+  }
+  
+  const alreadyFavorited = await Favorite.findOne({ userId, articleId });
+  if (alreadyFavorited) {
+    return response.status(409).send({ err: "Article already favorited." });
+  }
+
+  await new Favorite({userId, articleId}).save()
+  return response.sendStatus(201)
 })
 
 module.exports = routeHandler
