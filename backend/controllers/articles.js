@@ -80,4 +80,16 @@ routeHandler.post('/:id/favorite', async (request, response) => {
   return response.sendStatus(201)
 })
 
+routeHandler.delete('/:id/favorite', async (request, response) => {
+  const articleId = request.params.id
+  const userId = request.user.id
+
+  const { deletedCount } = await Favorite.deleteOne({ articleId, userId })
+
+  if (deletedCount) {
+    return response.sendStatus(204)
+  }
+  return response.status(400).send({err: "You cannot unfavorite an article you have not previously favorited!"})
+})
+
 module.exports = routeHandler
