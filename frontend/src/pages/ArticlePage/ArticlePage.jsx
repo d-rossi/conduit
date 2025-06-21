@@ -1,5 +1,4 @@
 import { useEffect } from "react"
-import Button from "../../components/Button/Button"
 import Comments from "../../components/Comments/Comments"
 import ProfileCard from "../../components/ProfileCard/ProfileCard"
 import { useParams } from 'react-router-dom'
@@ -10,6 +9,7 @@ import { useState } from "react"
 const ArticlePage = () => {
     const { articleId } = useParams()
     const [article, setArticle] = useState(null)
+    
     useEffect(() => {
         getArticle(articleId).then((data) => setArticle(data)).catch(err => console.log(err))
     }, [])
