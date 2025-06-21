@@ -50,4 +50,10 @@ routeHandler.patch('/:id', async (request, response) => {
   }
 })
 
+routeHandler.delete('/', async (request, response) => {
+  const userIdOfRequest = request.user.id
+  await Article.deleteMany({ userId: userIdOfRequest })
+  response.sendStatus(204)
+})
+
 module.exports = routeHandler
