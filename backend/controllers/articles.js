@@ -38,4 +38,16 @@ routeHandler.delete('/:id', async (request, response) => {
    }
 })
 
+routeHandler.patch('/:id', async (request, response) => {
+  const { content } = request.body
+  const articleId = request.params.id
+  const userIdOfRequest = request.user.id
+  const updatedArticle = await Article.findOneAndUpdate({ _id: articleId, userId: userIdOfRequest }, { content }, { new: true })
+  if (updatedArticle) {
+    response.status(200).send(updatedArticle)
+  } else {
+    response.status(400).send({err: "The article was not found or you are unauthorized to update it"})
+  }
+})
+
 module.exports = routeHandler
