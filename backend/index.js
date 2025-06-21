@@ -4,6 +4,7 @@ const config = require('./config')
 const cors = require('cors')
 const articlesRouter = require('./controllers/articles')
 const usersRouter = require('./controllers/users')
+const favoritesRouter = require('./controllers/favorites')
 const errorHandler = require('./utils/errorHandler')
 
 config.connectToDB()
@@ -14,6 +15,7 @@ app.use(express.static('dist'))
 
 app.use('/articles', articlesRouter)
 app.use('/users', usersRouter)
+app.use('/favorites', favoritesRouter)
 
 app.use(errorHandler.unknownEndpoint)
 
