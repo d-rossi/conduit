@@ -1,6 +1,7 @@
 const routeHandler = require('express').Router()
 const Article = require('../models/article')
 const Favorite = require('../models/favorite')
+const Comment = require('../models/comment')
 const tokenExtractor = require('../utils/tokenExtractor')
 
 routeHandler.get('/', (request, response) => {
@@ -57,6 +58,7 @@ routeHandler.delete('/', async (request, response) => {
   response.sendStatus(204)
 })
 
+//----------------------------------FAVORITE--------------------------------------------
 routeHandler.post('/:id/favorite', async (request, response) => {
   const articleId = request.params.id
   const userId = request.user.id
@@ -90,6 +92,26 @@ routeHandler.delete('/:id/favorite', async (request, response) => {
     return response.sendStatus(204)
   }
   return response.status(400).send({err: "You cannot unfavorite an article you have not previously favorited!"})
+})
+
+//----------------------------------COMMENTS--------------------------------------------
+routeHandler.post('/:id/comments', async (request, response) => {
+  const articleId = request.params.id
+  const userId = request.user.id
+  const { text } = request.body
+  
+  if (!text || text.trim().length === 0) {
+    return response.status(400).send({ err: "Comment text is required." });
+  }
+
+  const existingArticle = await Article.findById(articleId)
+
+  if(!existingArticle){
+    return response.status(404).send({err: "Article not found."})
+  }
+
+  const createdComment = await new Comment({userId, articleId, text}).save()
+  return response.json(createdComment)
 })
 
 module.exports = routeHandler
