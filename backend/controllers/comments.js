@@ -36,4 +36,23 @@ routeHandler.post('/:id/comments', tokenExtractor.verifyToken, async (request, r
   return response.json(createdComment)
 })
 
+routeHandler.delete('/:id/comments/:commentId', tokenExtractor.verifyToken, async (request, response) => {
+  const articleId = request.params.id
+  const commentId = request.params.commentId
+  const userId = request.user.id
+
+  const existingArticle = await Article.findById(articleId)
+
+  if(!existingArticle){
+    return response.status(404).send({err: "Article not found."})
+  }
+
+  const { deletedCount } = await Comment.deleteOne({ _id: commentId, articleId, userId })
+
+  if (!deletedCount) {
+    return response.status(400).send({err: "The comment was not found or you are unauthorized to delete it"})
+  } 
+  return response.sendStatus(204)
+})
+
 module.exports = routeHandler
