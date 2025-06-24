@@ -24,7 +24,7 @@ routeHandler.post('/:id/follow', async (request, response) => {
         return response.status(409).json({ err: "You already follow this user." })
     }
 
-    const newFollow = new Follower({userId: loggedInUserId, following: targetUserId}).save()
+    new Follower({userId: loggedInUserId, following: targetUserId}).save()
 
     return response.sendStatus(201)
 })
