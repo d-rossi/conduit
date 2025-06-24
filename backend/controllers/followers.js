@@ -5,7 +5,7 @@ const tokenExtractor = require('../utils/tokenExtractor')
 
 routeHandler.use(tokenExtractor.verifyToken)
     
-routeHandler.post('/:id/follow', async (request, response) => {
+routeHandler.post('/:id/followers', async (request, response) => {
     const targetUserId = request.params.id
     const loggedInUserId = request.user.id
 
@@ -27,6 +27,27 @@ routeHandler.post('/:id/follow', async (request, response) => {
     new Follower({userId: loggedInUserId, following: targetUserId}).save()
 
     return response.sendStatus(201)
+})
+
+routeHandler.delete('/:id/followers', async (request, response) => {
+    const targetUserId = request.params.id
+    const loggedInUserId = request.user.id
+
+    if (loggedInUserId === targetUserId) {
+        return response.status(400).json({ err: "You cannot unfollow yourself." })
+    }
+
+    const existingUser = await User.findById(targetUserId)
+    if (!existingUser) {
+        return response.status(404).json({ err: "User not found." })
+    }
+
+    const { deletedCount } = await Follower.deleteOne({ userId: loggedInUserId, following: targetUserId })
+    
+    if (!deletedCount) {
+        return response.status(400).send({err: "You cannot unfollow someone that you are not following."})
+    } 
+    return response.sendStatus(204)
 })
 
 module.exports = routeHandler
