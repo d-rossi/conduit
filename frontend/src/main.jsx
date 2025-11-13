@@ -10,6 +10,7 @@ import Anonymous from './utils/Anonymous.jsx'
 import CreateArticle from './pages/CreateArticlePage/CreateArticle.jsx'
 import Layout from './components/Layout/Layout.jsx'
 import ArticlePage from './pages/ArticlePage/ArticlePage.jsx'
+import SettingsPage from './pages/SettingsPage/SettingsPage.jsx'
 
 
 const router = createBrowserRouter([
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             path: "/article",
             element: <CreateArticle />,
           },
+          {
+            path: "/settings",
+            element: <SettingsPage />
+          }
         ],
       },
     ],

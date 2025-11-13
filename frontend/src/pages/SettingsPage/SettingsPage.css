@@ -1,0 +1,40 @@
+.settings {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings__nav {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+}
+
+.settings__nav li {
+    padding: 10px;
+}
+
+.settings__content {
+    background-color: var(--tertiary-light-color);
+    border-radius: 5px;
+    width: 80%;
+    height: 70vh;
+    margin: auto;
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.settings__content--group {
+    display: flex;
+    width: 70%;
+    justify-content: space-evenly;
+}
+
+.settings__content--group--button {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    gap: 5rem;
+}
