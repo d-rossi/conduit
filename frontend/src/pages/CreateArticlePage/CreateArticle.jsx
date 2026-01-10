@@ -25,7 +25,6 @@ const CreateArticle = () => {
             <Form>
                 <Input placeholder="Title" type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
                 <Input placeholder="Image Url" type="text" value={imgUrl} onChange={(e) => setImgUrl(e.target.value)}/>
-                {/* <Input placeholder="Tags" type="text" value={password} onChange={(e) => setPassword(e.target.value)}/> */}
                 <TextArea value={content} onChange={(e) => setContent(e.target.value)}/>
                 <Button text={"Create"} onClick={(e) => create(e)}/>
             </Form>

@@ -4,15 +4,32 @@ import Input from "../../components/Input/Input";
 import TextArea from "../../components/TextArea/TextArea";
 import "./SettingsPage.css"
 import { getFollowers } from "../../services/followerService";
+import { getUser, updateUserEmail } from "../../services/userService";
 
 const SettingsPage = () => {
     const [showProfile, setShowProfile] = useState(true);
     const [activeHeader, setActiveHeader] = useState("Following");
+    const [profile, setProfile] = useState({});
     const [followers, setFollowers] = useState([]);
+    const [email, setEmail] = useState("");
 
     useEffect(() => {
-        setFollowers(getFollowers());
+        getUser().then(user => {
+            setProfile(user)
+            setEmail(user.email)
+        }).catch(e => console.log(e));
+        // setFollowers(getFollowers());
     }, [])
+
+    const logout = () => {
+      localStorage.removeItem("token")
+      window.location.reload() //temp fix -> better to use context
+    }
+
+    const updateEmail = async () => {
+        const updatedUser = await updateUserEmail(email);
+        setProfile(updatedUser);
+    }
 
     return (
         <div className="settings">
@@ -22,19 +39,19 @@ const SettingsPage = () => {
             </ul>
             {showProfile && 
             <div className="settings__content">
-                <h3>Kate Scott</h3>
+                <h3>{profile.username}</h3>
                 <img></img>
                 <TextArea />
                 <div className="settings__content--group">
-                    <Input placeholder={"Email"}/>
-                    <Button text={"UPDATE"}/>
+                    <Input placeholder={"Email"} value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <Button text={"UPDATE"} onClick={updateEmail}/>
                 </div>
                 <div className="settings__content--group">
                     <Input placeholder={"Password"}/>
                     <Button text={"UPDATE"}/>   
                 </div>
                 <div className="settings__content--group--button">
-                    <Button text={"Logout"}/>
+                    <Button text={"Logout"} onClick={logout}/>
                     <Button text={"Delete Account"}/>
                 </div>
             </div>
