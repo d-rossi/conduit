@@ -2,7 +2,7 @@ import "./TextArea.css"
 
 const TextArea = ({text, onChange}) => {
     return (
-        <textarea placeholder="Content" value={text || ""} onChange={onChange}></textarea>
+        <textarea placeholder="Bio" value={text || ""} onChange={onChange}></textarea>
     )
 }
 

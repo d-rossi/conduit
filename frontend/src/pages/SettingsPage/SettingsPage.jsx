@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import "./SettingsPage.css"
-import { getFollowers } from "../../services/followerService";
 import { deleteUser, getUser, updateUserDescription, updateUserEmail } from "../../services/userService";
 import TextArea from "../../components/TextArea/TextArea";
 
@@ -10,7 +9,6 @@ const SettingsPage = () => {
     const [showProfile, setShowProfile] = useState(true);
     const [activeHeader, setActiveHeader] = useState("Following");
     const [profile, setProfile] = useState({});
-    const [followers, setFollowers] = useState([]);
     const [email, setEmail] = useState("");
 
     useEffect(() => {
@@ -18,7 +16,6 @@ const SettingsPage = () => {
             setProfile(user)
             setEmail(user.email)
         }).catch(e => console.log(e));
-        // setFollowers(getFollowers());
     }, [])
 
     const logout = () => {
