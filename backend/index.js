@@ -18,7 +18,7 @@ app.use(express.static('dist'))
 app.use('/articles', commentsRouter)
 app.use('/articles', articlesRouter)
 app.use('/users', usersRouter)
-app.use('/users', followersRouter)
+app.use('/followers', followersRouter)
 app.use('/favorites', favoritesRouter)
 
 app.use(errorHandler.unknownEndpoint)

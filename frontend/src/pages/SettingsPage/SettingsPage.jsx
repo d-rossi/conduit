@@ -4,18 +4,25 @@ import Input from "../../components/Input/Input";
 import "./SettingsPage.css"
 import { deleteUser, getUser, updateUserDescription, updateUserEmail } from "../../services/userService";
 import TextArea from "../../components/TextArea/TextArea";
+import { getFollowers } from "../../services/followerService";
 
 const SettingsPage = () => {
     const [showProfile, setShowProfile] = useState(true);
     const [activeHeader, setActiveHeader] = useState("Following");
     const [profile, setProfile] = useState({});
     const [email, setEmail] = useState("");
+    const [followers, setFollowers] = useState([]);
 
     useEffect(() => {
         getUser().then(user => {
             setProfile(user)
             setEmail(user.email)
-        }).catch(e => console.log(e));
+        }).catch(e => console.error(e));
+
+        getFollowers().then(followers => {
+            setFollowers(followers)
+            console.log(followers)
+        }).catch(e => console.error(e))
     }, [])
 
     const logout = () => {
@@ -76,33 +83,17 @@ const SettingsPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <td>
-                            <div className="settings__content__table__data">
-                                <img src="https://cdn.guardian.ng/wp-content/uploads/2025/07/IMG_5947.jpeg" className="avatar"/>
-                                <span>Kate Scott</span>
-                            </div>
-                        </td>
-                        <td><Button text={"Unfollow"}/></td>
-                        </tr>
-                        <tr>
-                        <td>
-                            <div className="settings__content__table__data">
-                                <img src="https://via.placeholder.com/40" class="avatar"/>
-                                <span>Kate Scott</span>
-                            </div>
-                        </td>
-                        <td><Button text={"Unfollow"}/></td>
-                        </tr>
-                        <tr>
-                        <td>
-                            <div className="settings__content__table__data">
-                                <img src="https://via.placeholder.com/40" class="avatar"/>
-                                <span>Kate Scott</span>
-                            </div>
-                        </td>
-                        <td><Button text={"Unfollow"}/></td>
-                        </tr>
+                        {activeHeader === "Followers" && followers?.map(f => 
+                            (<tr key={f.id}>
+                                <td>
+                                    <div className="settings__content__table__data">
+                                        <img src="" className="avatar"/>
+                                        <span>{f.userId.username}</span>
+                                    </div>
+                                </td>
+                                <td><Button text={"Unfollow"}/></td>
+                            </tr>) 
+                        )}
                     </tbody>
                 </table>
             </div>
