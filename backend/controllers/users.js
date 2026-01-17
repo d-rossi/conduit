@@ -3,6 +3,8 @@ const User = require('../models/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const tokenExtractor = require('../utils/tokenExtractor')
+const { request } = require('express')
+const Article = require('../models/article')
 
 routeHandler.post('/signup', async (request, response) => {
     const {username, email, password} = request.body
@@ -38,13 +40,27 @@ routeHandler.get('/', async (request, response) => {
 
 routeHandler.patch('/', async (request, response) => {
     const username = request.user.username
-    const { email } = request.body;
-    const upatedUser = await User.findOneAndUpdate({ username: username}, { $set: { email } }, { new: true })
+    const { email, description } = request.body;
+    const updateFields = {};
+    if (email != null) {
+        updateFields.email = email; 
+    }
+    if (description != null) {
+        updateFields.description = description;
+    }
+    const upatedUser = await User.findOneAndUpdate({ username: username}, { $set: updateFields }, { new: true })
     if (upatedUser) {
         response.status(200).send(upatedUser)
     } else {
         response.status(400).send({err: "The user was not found or you are unauthorized to update it"})
     }
+})
+
+routeHandler.delete('/', async (request, response) => {
+    const userId = request.user.id
+    await User.findByIdAndDelete(userId)
+    await Article.deleteMany({ userId })
+    response.sendStatus(204)
 })
 
 const getExistingUserByUsernameOrEmail = async (username, email) => {

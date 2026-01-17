@@ -17,19 +17,21 @@ const signUp = async (username, email, password) => {
 }
 
 const login = async (username, password) => {
-    try {
-        const response = await fetch(`${API_URL}/users/login`, {
-          method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({username, password})
-        });
+  const response = await fetch(`${API_URL}/users/login`, {
+    method: 'POST',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({username, password})
+  });
+
+  const data = await response.json();
   
-        return await response.json();
-      } catch (error) {
-        console.error('Error during login request:', error);
-      }
+  if (!response.ok) {
+    throw new Error(data.error || "Login failed"); 
+  }
+
+  return data;
 }
 
 export default {signUp, login};

@@ -4,6 +4,7 @@ userSchema = new mongoose.Schema({
     username: String,
     email: String,
     passwordHash: String,
+    description: String,
 }, {timestamps:true})
 
 userSchema.set('toJSON', {

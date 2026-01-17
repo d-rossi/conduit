@@ -1,8 +1,8 @@
 import "./TextArea.css"
 
-const TextArea = () => {
+const TextArea = ({text, onChange}) => {
     return (
-        <textarea placeholder="Content"></textarea>
+        <textarea placeholder="Content" value={text || ""} onChange={onChange}></textarea>
     )
 }
 

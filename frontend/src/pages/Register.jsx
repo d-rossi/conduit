@@ -27,7 +27,10 @@ const Register = ({ isSignUp }) => {
                         localStorage.setItem("token", data.token)
                         navigate("/")
                     })
-                 .catch((err) => console.log(err))
+                 .catch((err) => {
+                    console.error(err.message)
+                    alert(err.message)
+                })
     }
 
     const signUp = () => {
