@@ -1,21 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import "./SettingsPage.css"
 import { deleteUser, getUser, updateUserDescription, updateUserEmail } from "../../services/userService";
 import TextArea from "../../components/TextArea/TextArea";
+import { follow, getFollowers, getFollowing, unfollow } from "../../services/followerService";
 
 const SettingsPage = () => {
     const [showProfile, setShowProfile] = useState(true);
     const [activeHeader, setActiveHeader] = useState("Following");
     const [profile, setProfile] = useState({});
     const [email, setEmail] = useState("");
+    const [followers, setFollowers] = useState([]);
+    const [following, setFollowing] = useState([]);
+    const followingIds = useMemo(() => new Set(following?.map(f => f.following.id)), [following]);
 
     useEffect(() => {
         getUser().then(user => {
             setProfile(user)
             setEmail(user.email)
-        }).catch(e => console.log(e));
+        }).catch(e => console.error(e));
+
+        getFollowers().then(followers => {
+            setFollowers(followers)
+        }).catch(e => console.error(e))
+
+        getFollowing().then(following => {
+            setFollowing(following)
+        }).catch(e => console.error(e))
     }, [])
 
     const logout = () => {
@@ -39,6 +51,17 @@ const SettingsPage = () => {
     const updateDescription = async (description) => {
         const updatedUser = await updateUserDescription(description);
         setProfile(updatedUser);
+    }
+
+    const handleUnfollow = async (targetUserId) => {
+        await unfollow(targetUserId);
+        const updatedFollowing = following.filter(f => f.following.id !== targetUserId).concat([])
+        setFollowing(updatedFollowing)
+    }
+
+    const handleFollow = async (targetUserId) => {
+        const newFollow = await follow(targetUserId);
+        setFollowing(following.concat([newFollow]))
     }
 
     return (
@@ -76,33 +99,31 @@ const SettingsPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <td>
-                            <div className="settings__content__table__data">
-                                <img src="https://cdn.guardian.ng/wp-content/uploads/2025/07/IMG_5947.jpeg" className="avatar"/>
-                                <span>Kate Scott</span>
-                            </div>
-                        </td>
-                        <td><Button text={"Unfollow"}/></td>
-                        </tr>
-                        <tr>
-                        <td>
-                            <div className="settings__content__table__data">
-                                <img src="https://via.placeholder.com/40" class="avatar"/>
-                                <span>Kate Scott</span>
-                            </div>
-                        </td>
-                        <td><Button text={"Unfollow"}/></td>
-                        </tr>
-                        <tr>
-                        <td>
-                            <div className="settings__content__table__data">
-                                <img src="https://via.placeholder.com/40" class="avatar"/>
-                                <span>Kate Scott</span>
-                            </div>
-                        </td>
-                        <td><Button text={"Unfollow"}/></td>
-                        </tr>
+                        {activeHeader === "Followers" && followers?.map(f => 
+                            (<tr key={f.id}>
+                                <td>
+                                    <div className="settings__content__table__data">
+                                        <img src="" className="avatar"/>
+                                        <span>{f.userId.username}</span>
+                                    </div>
+                                </td>
+                                {followingIds.has(f.userId.id) ?
+                                    <td></td> :
+                                    <td><Button text={"Follow"} onClick={() => handleFollow(f.userId.id)}/></td>
+                                }
+                            </tr>) 
+                        )}
+                         {activeHeader === "Following" && following?.map(f => 
+                            (<tr key={f.id}>
+                                <td>
+                                    <div className="settings__content__table__data">
+                                        <img src="" className="avatar"/>
+                                        <span>{f.following.username}</span>
+                                    </div>
+                                </td>
+                                <td><Button text={"Unfollow"} onClick={() => handleUnfollow(f.following.id)}/></td>
+                            </tr>) 
+                        )}
                     </tbody>
                 </table>
             </div>
